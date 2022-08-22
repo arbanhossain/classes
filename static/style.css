@@ -1,0 +1,78 @@
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+    height: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: rgb(104, 110, 117);
+    /* display: none; */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #989c9e;
+}
+
+body {
+    background-color: rgb(19, 22, 24) !important;
+    color: white !important;
+}
+
+td {
+    margin-left: 2% !important;
+    margin-right: 2% !important;
+    text-align: center !important;
+    min-width: 120px !important;
+}
+
+th {
+    padding-left: auto !important;
+    padding-right: auto !important;
+    min-width: 80px !important;
+    text-align: center !important;
+}
+
+.table-holder {
+    border-radius: 8px !important;
+    border: solid 1px rgb(171, 171, 171) !important;
+}
+
+.popup-overlay {
+    /*Hides pop-up when there is no "active" class*/
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    /* left: 25%; */
+}
+
+.popup-overlay.active {
+    /*displays pop-up when "active" class is present*/
+    visibility: visible;
+    text-align: center;
+}
+
+.popup-content {
+    /*Hides pop-up content when there is no "active" class */
+    visibility: hidden;
+}
+
+.popup-content.active {
+    /*Shows pop-up content when "active" class is present */
+    visibility: visible;
+}
