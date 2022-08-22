@@ -33,6 +33,7 @@ const DAYS = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 
 let routine, notifications;
 
 const setup = () => {
+	$("#add_noti").prop('disabled', !is_admin)
 	if(localStorage.getItem('classnotifications_local') === null) {
 		notifications = []
 		localStorage.setItem('classnotifications_local', JSON.stringify(notifications))
@@ -81,6 +82,14 @@ const populate_table_data = () => {
 	})
 }
 
+const populate_notifications_data = () => {
+	let noti_list = $('#notifications_list')
+	noti_list.empty()
+	notifications.forEach(noti => {
+		noti_list.append($('<li>').html(`<b>${(new Date(noti.time)).toDateString()}</b>: ${noti.message}`))
+	})
+}
+
 const handle_remove_period = (id) => {
 	DAYS.forEach(day => {
 		routine[day] = routine[day].filter(obj => obj._id !== id)
@@ -91,7 +100,7 @@ const handle_remove_period = (id) => {
 
 const show_add_period = (e) => {
 	current_day = e.id
-	$(".popup-overlay, .popup-content").addClass("active");
+	$("#routine_modal_overlay, #routine_modal_content").addClass("active");
 	console.log(e)
 }
 
@@ -108,8 +117,21 @@ const handle_add_period = (e) => {
 	routine[current_day].push(period_obj)
 	localStorage.setItem('classroutine_local', JSON.stringify(routine))
 	populate_table_data()
-	$(".popup-overlay, .popup-content").removeClass("active");
+	$("#routine_modal_overlay, #routine_modal_content").removeClass("active");
 	$(`#submit-button`).prop('disabled', false)
+}
+
+const handle_add_noti = () => {
+	let noti = {
+		"message": $('#noti_msg').val(),
+		"time": new Date(),
+		"_id": uid() 
+	}
+	notifications.push(noti)
+	localStorage.setItem('classnotifications_local', JSON.stringify(notifications))
+	populate_notifications_data()
+	$("#noti_modal_overlay, #noti_modal_content").removeClass("active");
+
 }
 
 //populate_table_data()
@@ -117,16 +139,26 @@ const handle_add_period = (e) => {
 document.addEventListener('DOMContentLoaded', e => {
 	setup()
 	populate_table_data()
+	populate_notifications_data()
 })
 
 $("#add_form").on('submit', handle_add_period);
 
 //appends an "active" class to .popup and .popup-content when the "Open" button is clicked
 $(".open").on("click", function () {
-	$(".popup-overlay, .popup-content").addClass("active");
+	$("#routine_modal_overlay, #routine_modal_content").addClass("active");
 });
 
 //removes the "active" class to .popup and .popup-content when the "Close" button is clicked 
 $(".close").on("click", function () {
-	$(".popup-overlay, .popup-content").removeClass("active");
+	$("#routine_modal_overlay, #routine_modal_content").removeClass("active");
+});
+
+$("#add_noti").on("click", function () {
+	$("#noti_modal_overlay, #noti_modal_content").addClass("active");
+});
+
+//removes the "active" class to .popup and .popup-content when the "Close" button is clicked 
+$("#close_noti").on("click", function () {
+	$("#noti_modal_overlay, #noti_modal_content").removeClass("active");
 });
