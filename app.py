@@ -10,7 +10,7 @@ import requests
 
 app = Flask(__name__)
 
-cred = credentials.Certificate(os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
+cred = credentials.Certificate(requests.get(os.environ['GOOGLE_APPLICATION_CREDENTIALS']).json())
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
