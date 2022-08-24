@@ -25,7 +25,7 @@ def index():
   # print(routine_ref.to_dict())
   # print([doc.to_dict() for doc in routine])
 	noti = [doc.to_dict() for doc in noti_ref.stream()]
-	admin = 1 if request.args.get('pass') == 'arban' else 0
+	admin = 1 if request.args.get('pass') == os.environ['PASS'] else 0
 	return render_template('home.html', title="Home", admin=admin, routine=json.dumps(routine.to_dict()), noti=json.dumps(noti))
 
 @app.route('/update', methods=['POST'])
