@@ -1,9 +1,10 @@
-<h3>Routine</h3>
-
 <div class="container">
-    <div class="table-holder" style="overflow-x: auto;">
-        <table class="table table-striped table bordered table-dark">
-            <thead>
+    <br>
+    <h1>Routine</h1>
+    <br>
+    <div class="table-holder" style="overflow-x: auto; margin-right:10px">
+        <table class="table table-bordered">
+            <thead class="table-dark" >
                 <tr>
                     <th scope="col">Sunday</th>
                     <th scope="col">Monday</th>
@@ -21,7 +22,7 @@
         </table>
     </div>
     <!--Creates the popup body-->
-    <div class="popup-overlay" id="routine_modal_overlay">
+    <div class="popup-overlay" id="routine_modal_overlay" >
         <!--Creates the popup content-->
         <div class="popup-content" id="routine_modal_content">
             <h2>Add</h2>
@@ -34,5 +35,6 @@
             <button class="close">Close</button>
         </div>
     </div>
-    <button id="update_routine_button" onclick="update_routine()">Update</button>
+    <button {% if admin == 0 %}style="display:none;"{% endif %} id="update_routine_button" onclick="update_routine()">Update</button>
 </div>
+<br>
