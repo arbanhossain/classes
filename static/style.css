@@ -55,7 +55,7 @@ th {
     position: absolute;
     top: 0;
     left: 0;
-    /* background-color: black; */
+    background-color: white;
     width: 100vw;
     height: 100vh;
     /* left: 25%; */
@@ -63,9 +63,10 @@ th {
 
 .popup-overlay.active {
     /*displays pop-up when "active" class is present*/
-    top: 50%;
+    /* top: 50%; */
     visibility: visible;
     text-align: center;
+    z-index: 3;
 }
 
 .popup-content {
@@ -76,4 +77,5 @@ th {
 .popup-content.active {
     /*Shows pop-up content when "active" class is present */
     visibility: visible;
+    z-index: 3;
 }
