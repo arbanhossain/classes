@@ -1,3 +1,4 @@
+from distutils.log import debug
 from flask import Flask, render_template, request, Response, jsonify, redirect, url_for
 
 import json
@@ -25,11 +26,13 @@ def index():
   # print(routine_ref.to_dict())
   # print([doc.to_dict() for doc in routine])
 	noti = [doc.to_dict() for doc in noti_ref.stream()]
-	admin = 1 if request.args.get('pass') == os.environ['PASS'] else 0
+	admin = 1 if request.args.get('pass') == os.environ.get('PASS') else 0
 	return render_template('home.html', title="Home", admin=admin, routine=json.dumps(routine.to_dict()), noti=json.dumps(noti))
 
 @app.route('/update', methods=['POST'])
 def update():
+	if request.args.get('pass') != os.environ.get('PASS'):
+		return jsonify({"message": "vaag baora"})
 	routine = request.get_json()
 	print(routine)
 	routine_ref.set(routine)
@@ -37,6 +40,8 @@ def update():
 
 @app.route('/update_noti', methods=['POST'])
 def update_noti():
+	if request.args.get('pass') != os.environ.get('PASS'):
+		return jsonify({"message": "vaag baora"})
 	noti = request.get_json()
 	doc_ref = noti_ref.document(noti.get('_id'))
 	doc_ref.set(noti)
@@ -44,10 +49,12 @@ def update_noti():
 
 @app.route('/delete_noti', methods=['POST'])
 def delete_noti():
+	if request.args.get('pass') != os.environ.get('PASS'):
+		return jsonify({"message": "vaag baora"})
 	noti = request.get_json()
 	doc_ref = noti_ref.document(noti.get('_id'))
 	doc_ref.delete()
 	return jsonify({"redirect": "/"})
 
 if __name__ == "__main__":
-    app.run()
+	app.run()

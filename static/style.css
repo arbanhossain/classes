@@ -1,7 +1,7 @@
 /* width */
 ::-webkit-scrollbar {
     width: 7px;
-    height: 12px;
+    height: 7px;
 }
 
 /* Track */
@@ -16,31 +16,31 @@
 /* Handle */
 ::-webkit-scrollbar-thumb {
     border-radius: 6px;
-    background: rgb(104, 110, 117);
+    background: rgb(221, 221, 221);
     /* display: none; */
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #989c9e;
+    background: #bcc2c5;
 }
 
 body {
-    background-color: rgb(19, 22, 24) !important;
-    color: white !important;
+    /* background-color: rgb(19, 22, 24) !important;
+    color: white !important; */
 }
 
 td {
     margin-left: 2% !important;
     margin-right: 2% !important;
     text-align: center !important;
-    min-width: 120px !important;
+    width: 150px !important;
 }
 
 th {
     padding-left: auto !important;
     padding-right: auto !important;
-    min-width: 80px !important;
+    width: 150px !important;
     text-align: center !important;
 }
 
@@ -55,7 +55,7 @@ th {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: black;
+    /* background-color: black; */
     width: 100vw;
     height: 100vh;
     /* left: 25%; */
@@ -63,6 +63,7 @@ th {
 
 .popup-overlay.active {
     /*displays pop-up when "active" class is present*/
+    top: 50%;
     visibility: visible;
     text-align: center;
 }

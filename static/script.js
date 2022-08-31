@@ -50,6 +50,9 @@ const setup = () => {
 
 
 let current_day = "sunday"
+const urlParams = new URLSearchParams(window.location.search);
+const pass = urlParams.get('pass')
+
 
 const uid = () => {
 	return (Math.random() + 1).toString(36).substring(2)
@@ -63,7 +66,8 @@ const populate_table_data = () => {
 		routine[day].sort((a, b) => parseInt(a.time) - parseInt(b.time))
 		html = ``
 		routine[day].forEach(period => {
-			html += `<p><b>${period.time}</b> - ${period.course}  <button id="${period._id}" onclick="handle_remove_period(this.id)" ${is_admin ? '' : 'style="display: none;"'}>-</button><br></p>`
+			html += `<div class="row p-3"> <span> <b>${period.time}</b>  ${period.course} </span>  <button id="${period._id}" onclick="handle_remove_period(this.id)" ${is_admin ? '' : 'style="display: none;"'}>-</button><br></div>
+					<div class="row"> <span><hr></span> <div>`
 		})
 		data_row.append($('<td>').attr('id', `${day}_td`).html(`
             ${html}
@@ -76,7 +80,7 @@ const populate_notifications_data = () => {
 	let noti_list = $('#notifications_list')
 	noti_list.empty()
 	notifications.forEach(noti => {
-		noti_list.append($('<li>').html(`<button id="${noti._id}" onclick="handle_remove_notification(this.id)" ${is_admin ? '' : 'style="display: none;"'}>-</button><b>${(new Date(noti.time)).toDateString()}</b>: ${noti.message}`))
+		noti_list.append($('<li class="list-group-item" >').html(`<button id="${noti._id}" onclick="handle_remove_notification(this.id)" ${is_admin ? '' : 'style="display: none;"'}>-</button><b>${(new Date(noti.time)).toDateString()}</b>: ${noti.message}`))
 	})
 }
 
@@ -127,7 +131,7 @@ const handle_add_noti = () => {
 }
 
 const handle_remove_notification = async (id) => {
-	let res = await fetch('/delete_noti', {
+	let res = await fetch('/delete_noti'+'?pass='+pass, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -141,7 +145,7 @@ const handle_remove_notification = async (id) => {
 }
 
 const update_routine = async () => {
-	let res = await fetch('/update', {
+	let res = await fetch('/update'+'?pass='+pass, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -155,7 +159,7 @@ const update_routine = async () => {
 }
 
 const update_notification = async (noti) => {
-	let res = await fetch('/update_noti', {
+	let res = await fetch('/update_noti'+'?pass='+pass, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
