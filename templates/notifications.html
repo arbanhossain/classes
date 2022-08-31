@@ -1,16 +1,25 @@
-<h3>Notifications</h3>
-<button id="add_noti">Add Announcement!</button>
 <div class="container">
-    <ul class="notifications" id="notifications_list">
+    <br>
+    <h3>Notifications</h3>
+    <br>
+    <button {% if admin == 0 %}style="display:none;"{% endif %} id="add_noti">Add Announcement!</button>
+
+
+    <ul class="notifications list-group" id="notifications_list">
         
     </ul>
-</div>
-<div class="popup-overlay" id="noti_modal_overlay">
-    <!--Creates the popup content-->
-    <div class="popup-content" id="noti_modal_content">
-        <h2>Add</h2>
-        <input type="text" name="noti_msg" id="noti_msg"><br>
-        <button id="noti_add_button" onclick="handle_add_noti()">Add</button>
-        <button id="close_noti">Close</button>
+
+    
+    <div class="popup-overlay" id="noti_modal_overlay">
+        <!--Creates the popup content-->
+        <div class="popup-content" id="noti_modal_content">
+            <h2>Add</h2>
+            <input type="text" name="noti_msg" id="noti_msg"><br>
+            <button id="noti_add_button" onclick="handle_add_noti()">Add</button>
+            <button id="close_noti">Close</button>
+        </div>
     </div>
+
 </div>
+<br>
+<br>
